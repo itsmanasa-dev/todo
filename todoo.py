@@ -1,66 +1,46 @@
-# todo.py
-# Simple To-Do List App
+# Simple Python Quiz App
 
-FILENAME = "tasks.txt"
+def quiz():
+    questions = {
+        "1. What is the capital of France?": "b",
+        "2. Which language is used for web apps?": "a",
+        "3. Who developed Python?": "c",
+        "4. What is 7 * 8?": "d",
+        "5. What keyword is used to define a function in Python?": "b"
+    }
 
-def load_tasks():
-    try:
-        with open(FILENAME, "r") as file:
-            return [line.strip() for line in file.readlines()]
-    except FileNotFoundError:
-        return []
+    options = [
+        ["a. Java", "b. Python", "c. HTML", "d. C++"],
+        ["a. JavaScript", "b. SQL", "c. Photoshop", "d. MS Word"],
+        ["a. Bill Gates", "b. Elon Musk", "c. Guido van Rossum", "d. Mark Zuckerberg"],
+        ["a. 54", "b. 58", "c. 60", "d. 56"],
+        ["a. func", "b. def", "c. function", "d. define"]
+    ]
 
-def save_tasks(tasks):
-    with open(FILENAME, "w") as file:
-        for task in tasks:
-            file.write(task + "\n")
+    score = 0
+    print("\n✨ Welcome to the Python Quiz Game ✨")
+    print("-----------------------------------")
 
-def show_tasks(tasks):
-    if not tasks:
-        print("\nNo tasks found!\n")
-    
-    else:
-        print("\nYour Tasks:")
-        for i, task in enumerate(tasks, start=1):
-            print(f"{i}. {task}")
+    for i, (question, answer) in enumerate(questions.items()):
+        print(f"\n{question}")
+        for opt in options[i]:
+            print(opt)
+        user_answer = input("Enter your answer (a/b/c/d): ").lower()
 
-def main():
-    tasks = load_tasks()
-    while True:
-        print("\n===== TO-DO LIST APP =====")
-        print("1. Add Task")
-        print("2. View Tasks")
-        print("3. Remove Task")
-        print("4. Exit")
-        choice = input("Enter your choice: ")
-
-        if choice == "1":
-            task = input("Enter task: ")
-            tasks.append(task)
-            save_tasks(tasks)
-            print("✅ Task added successfully!")
-
-        elif choice == "2":
-            show_tasks(tasks)
-
-        elif choice == "3":
-            show_tasks(tasks)
-            try:
-                num = int(input("Enter task number to remove: "))
-                if 0 < num <= len(tasks):
-                    removed = tasks.pop(num - 1)
-                    save_tasks(tasks)
-                    print(f"🗑️ Removed: {removed}")
-                else:
-                    print("Invalid task number!")
-            except ValueError:
-                print("Please enter a valid number!")
-
-        elif choice == "4":
-            print("👋 Goodbye! Have a productive day!")
-            break
+        if user_answer == answer:
+            print("✅ Correct!")
+            score += 1
         else:
-            print("Invalid choice! Try again.")
+            print(f"❌ Wrong! Correct answer is '{answer}'.")
 
-if __name__ == "__main__":
-    main()
+    print("\n-----------------------------------")
+    print(f"🎯 Your final score: {score}/{len(questions)}")
+    if score == len(questions):
+        print("🏆 Excellent! You’re a genius!")
+    elif score >= 3:
+        print("👍 Good job! Keep practicing.")
+    else:
+        print("😅 You need to study more!")
+
+# Run the quiz
+quiz()
