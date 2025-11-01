@@ -42,5 +42,5 @@ def quiz():
     else:
         print("😅 You need to study more!")
 
-# Run the quiz
+
 quiz()
