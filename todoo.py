@@ -41,6 +41,4 @@ def quiz():
         print("👍 Good job! Keep practicing.")
     else:
         print("😅 You need to study more!")
-
-
 quiz()
